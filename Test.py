@@ -101,14 +101,24 @@ for tag in likes_bs4tags:
         
 #find COMMENTS on LinkedIn
 #same concept here
-comments_bs4tags = soup.find_all("li", attrs = {"class" : "social-details-social-counts__comments social-details-social-counts__item"})
+comments_bs4tags = soup.find_all("ul", attrs = {"class" : "social-details-social-counts"})
 for tag in comments_bs4tags:
-    commentTag = tag.find("span", attrs = {"class" : "social-details-social-counts__comments social-details-social-counts__item"}) 
-    if (commentTag == None):
-        print(0)
-    else:
-        print(commentTag)
+    commentTag = BeautifulSoup(str(tag), features="html.parser")
+    commentTag2 = commentTag.find("li", attrs= {"class" : "social-details-social-counts__comments"})
+    commentTag2 = BeautifulSoup(str(commentTag2), features="html.parser")
+    commentTag2 = commentTag2.find("span")
 
+    if (commentTag2 == None):    
+        # print(0)
+        comments.append(0)
+    else:
+        commentText = re.findall('[0-9]+',commentTag2.text)
+        t = commentText.pop()
+        # print(int(t))
+        comments.append(int(t))
+
+    #print(commentTag2)
+    
         
 
     #strtag = str(tag)

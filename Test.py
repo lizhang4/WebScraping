@@ -27,7 +27,7 @@ print("Please enter your usernmae exactly how it appears in your profile link (a
 link_username = str("andypeh/")
 print()
 print("Please enter the number of the last posts you want to analyse:")
-number_of_posts = 10
+number_of_posts = 30
 
 #create a browser-specific (Google Chrome) web navigation simulator:
 browser = webdriver.Chrome(ChromeDriverManager().install())
@@ -149,19 +149,31 @@ print(comments)
 ########################################################
 
 
-# import matplotlib.pyplot as plt
-# import pandas as pd
-# import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
 
 # # Reverse the lists
-# likes.reverse()
-# comments.reverse()
-# views.reverse()
+likes.reverse()
+comments.reverse()
+views.reverse()
 
 # # Convert lists into pandas DataFrames
-# likes_df = pd.DataFrame(likes, columns = ['Likes'])
-# comments_df = pd.DataFrame(comments, columns =['Comments'])
-# views_df = pd.DataFrame(views, columns =['Views'])
+likes_df = pd.DataFrame(likes, columns = ['Likes'])
+comments_df = pd.DataFrame(comments, columns =['Comments'])
+views_df = pd.DataFrame(views, columns =['Views'])
+
+post=[i for i in range(0,number_of_posts)]
+plt.figure(1)
+plt.plot(post,likes)
+plt.xlabel('post')
+plt.ylabel('likes')
+
+plt.figure(2)
+plt.plot(post,comments)
+plt.xlabel('post')
+plt.ylabel('comments')
+plt.show()
 
 # # Get rid of the outliers
 # #   remove data points if further than 3 standard deviations away...
